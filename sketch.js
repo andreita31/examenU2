@@ -1,13 +1,27 @@
+var madridTime = [];
 
-function setup() {
-    createCanvas(720, 320);
-}
-
-const time = {
+var time = {
     hours: 0,
     minutes: 0,
     seconds: 0
 }
+
+function setup() {
+    let canvas = createCanvas(665, 250);
+    canvas.parent('canvasContainer');
+
+}
+
+function getTimeM(){
+    const mTime = document.getElementById("mTime").value;
+    var madridTime = mTime.split(":");
+    time = {
+        hours: parseInt(madridTime[0]),
+        minutes: parseInt(madridTime[1]),
+        seconds: parseInt(madridTime[2])
+    }
+}
+
 
 const clocks = [
     {
@@ -49,7 +63,7 @@ const radiusClock = 100;
 const padding = 10;
 
 function draw() {
-    background(200)
+    background('#D5CABD');
     let i = 0;
     
     for (const clock of clocks) {
@@ -57,19 +71,25 @@ function draw() {
         drawClock(x, radiusClock + padding, time.seconds, time.minutes, time.hours + clock.hoursDiff, clock.algorithm);
         textAlign(CENTER);
         textSize(20);
+        strokeWeight(1);
         text(clock.name, x, 240);
         i++;
     }
 }
 
 function drawClock(x, y, seconds, minutes, hours, algorithm) {
+    circle(x, y, radiusClock * 2);
+    strokeWeight(4);
     const hoursAngle = (hours % 12 / 12) * (Math.PI * 2) - Math.PI / 2;
     const minutesAngle = (minutes % 60 / 60) * (Math.PI * 2) - Math.PI / 2;
     const secondsAngle = (seconds % 60 / 60) * (Math.PI * 2) - Math.PI / 2;
     drawClockhand(algorithm, x, y, radiusClock * .6, hoursAngle);
     drawClockhand(algorithm, x, y, radiusClock * .7, minutesAngle);
+    stroke('red');
+    strokeWeight(2);
     drawClockhand(algorithm, x, y, radiusClock * .9, secondsAngle);
-
+    stroke('black');
+    strokeWeight(4);
     drawCircle(x, y, radiusClock);
 }
 
