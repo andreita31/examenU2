@@ -27,12 +27,12 @@ const clocks = [
     {
         name: "Madrid",
         hoursDiff: 0,
-        algorithm: drawLineDDA
+        algorithm: drawLinePointSlope
     },
     {
         name: "New York",
         hoursDiff: -6,
-        algorithm: drawLinePointSlope
+        algorithm: drawLineDDA
     },
     {
         name: "Buenos Aires",
